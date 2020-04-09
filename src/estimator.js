@@ -10,10 +10,11 @@ const currentlyInfected = (input) => {
   return input;
 };
 const getInfactions = (t) => (d) => {
-  let i, time = 0, t;
-  for (i; time > 2; i +=1) {
+  let i = 0;
+  let time = t;
+  for (i; time > 2; i += 1) {
     time = Math.floor(parseInt(time, 10) / 3);
-  };
+  }
   const factor = i * 3;
   return d * (2 ** factor);
 }
@@ -36,7 +37,7 @@ const infectionsByRequestedTime = (input) => {
       impact.infectionsByRequestedTime = daysInfaction(impact.currentlyInfected);
       severeImpact.infectionsByRequestedTime = daysInfaction(severeImpact.currentlyInfected);
       break;
-  };
+  }
   return input;
 };
 
@@ -82,7 +83,7 @@ const dollarsInFlight = (input) => {
       impact.dollarsInFlight = daysRate(impact.infectionsByRequestedTime);
       severeImpact.dollarsInFlight = daysRate(severeImpact.infectionsByRequestedTime);
       break;
-  };
+  }
   return input;
 };
 
