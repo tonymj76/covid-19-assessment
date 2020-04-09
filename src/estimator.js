@@ -42,7 +42,7 @@ const infectionsByRequestedTime = (input) => {
 };
 
 // const amount = (percentValue, amt) => percentValue/100 * amt
-const whatIs = (percentage) => ({ of : (amount) => (parseFloat(percentage) / 100) * amount });
+const whatIs = (percentage) => ({ of: (amount) => (parseFloat(percentage) / 100) * amount });
 const convertPercent = (input) => {
   const { impact, severeImpact } = input;
   impact.severeCasesByRequestedTime = whatIs('15%').of(impact.infectionsByRequestedTime);
@@ -66,10 +66,23 @@ const hospitalBedsByRequestedTime = (input) => {
 const rateDollar = (...args) => (d) => (d * args.reduce((acc, preV) => ((acc * preV))));
 const dollarsInFlight = (input) => {
   const { data, impact, severeImpact } = input;
+  const { region } = data;
   const periodType = data.periodType.trim().toLowerCase();
-  const monthsRate = rateDollar(region.avgDailyIncomeInUSD, region.avgDailyIncomePopulation, data.timeToElapse * 30);
-  const yearsRate = rateDollar(region.avgDailyIncomeInUSD, region.avgDailyIncomePopulation, data.timeToElapse * 360);
-  const daysRate = rateDollar(region.avgDailyIncomeInUSD, region.avgDailyIncomePopulation, data.timeToElapse);
+  const monthsRate = rateDollar(
+    region.avgDailyIncomeInUSD,
+    region.avgDailyIncomePopulation,
+    data.timeToElapse * 30);
+
+  const yearsRate = rateDollar(
+    region.avgDailyIncomeInUSD,
+    region.avgDailyIncomePopulation,
+    data.timeToElapse * 360);
+
+  const daysRate = rateDollar(
+    region.avgDailyIncomeInUSD,
+    region.avgDailyIncomePopulation,
+    data.timeToElapse);
+
   switch (periodType) {
     case 'months':
       impact.dollarsInFlight = monthsRate(impact.infectionsByRequestedTime);
