@@ -63,7 +63,9 @@ const hospitalBedsByRequestedTime = (input) => {
   return input;
 };
 
-const rateDollar = (...args) => (d) => (d * args.reduce((acc, preV) => ((acc * preV))));
+const rateDollar = (...args) => (d) => (Math.floor(
+  d * args.reduce((acc, preV) => ((acc * preV)))
+));
 const dollarsInFlight = (input) => {
   const { data, impact, severeImpact } = input;
   const { region } = data;
