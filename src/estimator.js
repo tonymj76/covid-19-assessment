@@ -38,7 +38,9 @@ const infectionsByRequestedTime = (input) => {
 };
 
 // const amount = (percentValue, amt) => percentValue/100 * amt
-const whatIs = (percentage) => ({ of: (amount) => (parseFloat(percentage) / 100) * amount });
+const whatIs = (percentage) => ({ of: (amount) => Math.floor(
+  (parseFloat(percentage) / 100) * amount 
+)});
 const convertPercent = (input) => {
   const { impact, severeImpact } = input;
   impact.severeCasesByRequestedTime = whatIs('15%').of(impact.infectionsByRequestedTime);
