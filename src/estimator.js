@@ -10,7 +10,7 @@ const currentlyInfected = (input) => {
   return input;
 };
 const getInfactions = (time) => (d) => {
-  factor = Math.floor(parseInt(time, 10) / 3);
+  const factor = Math.floor(parseInt(time, 10) / 3);
   return d * (2 ** factor);
 };
 
