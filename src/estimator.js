@@ -63,9 +63,7 @@ const hospitalBedsByRequestedTime = (input) => {
   return input;
 };
 
-const rateDollar = (...args) => (d) => (
-  Math.trunc(d * args.reduce((acc, preV) => ((acc * preV))))
-);
+const rateDollar = (...args) => (d) => (d * args.reduce((acc, preV) => ((acc * preV))));
 const dollarsInFlight = (input) => {
   const { data, impact, severeImpact } = input;
   const { region } = data;
@@ -90,16 +88,28 @@ const dollarsInFlight = (input) => {
 
   switch (periodType) {
     case 'months':
-      impact.dollarsInFlight = monthsRate(impact.infectionsByRequestedTime);
-      severeImpact.dollarsInFlight = monthsRate(severeImpact.infectionsByRequestedTime);
+      impact.dollarsInFlight = Math.trunc(
+        monthsRate(impact.infectionsByRequestedTime)
+      );
+      severeImpact.dollarsInFlight = Math.trunc(
+        monthsRate(severeImpact.infectionsByRequestedTime)
+      );
       break;
     case 'weeks':
-      impact.dollarsInFlight = weeksRate(impact.infectionsByRequestedTime);
-      severeImpact.dollarsInFlight = weeksRate(severeImpact.infectionsByRequestedTime);
+      impact.dollarsInFlight = Math.trunc(
+        weeksRate(impact.infectionsByRequestedTime)
+      );
+      severeImpact.dollarsInFlight = Math.trunc(
+        weeksRate(severeImpact.infectionsByRequestedTime)
+      );
       break;
     default:
-      impact.dollarsInFlight = daysRate(impact.infectionsByRequestedTime);
-      severeImpact.dollarsInFlight = daysRate(severeImpact.infectionsByRequestedTime);
+      impact.dollarsInFlight = Math.trunc(
+        daysRate(impact.infectionsByRequestedTime)
+      );
+      severeImpact.dollarsInFlight = Math.trunc(
+        daysRate(severeImpact.infectionsByRequestedTime)
+      );
       break;
   }
   return input;
