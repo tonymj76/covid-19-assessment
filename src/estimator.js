@@ -71,17 +71,20 @@ const dollarsInFlight = (input) => {
   const monthsRate = rateDollar(
     region.avgDailyIncomeInUSD,
     region.avgDailyIncomePopulation,
-    data.timeToElapse * 30);
+    data.timeToElapse * 30
+  );
 
   const yearsRate = rateDollar(
     region.avgDailyIncomeInUSD,
     region.avgDailyIncomePopulation,
-    data.timeToElapse * 360);
+    data.timeToElapse * 360
+  );
 
   const daysRate = rateDollar(
     region.avgDailyIncomeInUSD,
     region.avgDailyIncomePopulation,
-    data.timeToElapse);
+    data.timeToElapse
+  );
 
   switch (periodType) {
     case 'months':
@@ -114,5 +117,5 @@ const covid19ImpactEstimator = (data) => {
     impact: {},
     severeImpact: {}
   });
-}
+};
 export default covid19ImpactEstimator;
