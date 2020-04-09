@@ -38,9 +38,7 @@ const infectionsByRequestedTime = (input) => {
 };
 
 // const amount = (percentValue, amt) => percentValue/100 * amt
-const whatIs = (percentage) => ({ of: (amount) => Math.floor(
-  (parseFloat(percentage) / 100) * amount 
-)});
+const whatIs = (percentage) => ({ of: (amount) => (parseFloat(percentage) / 100) * amount });
 const convertPercent = (input) => {
   const { impact, severeImpact } = input;
   impact.severeCasesByRequestedTime = whatIs('15%').of(impact.infectionsByRequestedTime);
@@ -56,12 +54,8 @@ const hospitalBedsByRequestedTime = (input) => {
   const { data, impact, severeImpact } = input;
   // const avarageCase = whatIs('65%').of(data.totalHospitalBeds);
   const expectCase = whatIs('35%').of(data.totalHospitalBeds);
-  impact.hospitalBedsByRequestedTime = Math.floor(
-    expectCase - impact.severeCasesByRequestedTime
-  );
-  severeImpact.hospitalBedsByRequestedTime = Math.floor(
-    expectCase - severeImpact.severeCasesByRequestedTime
-  );
+  impact.hospitalBedsByRequestedTime = (expectCase - impact.severeCasesByRequestedTime) * 0.05;
+  severeImpact.hospitalBedsByRequestedTime = (expectCase - severeImpact.severeCasesByRequestedTime) * 0.05;
   return input;
 };
 
