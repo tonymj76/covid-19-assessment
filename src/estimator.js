@@ -53,9 +53,9 @@ const convertPercent = (input) => {
 const hospitalBedsByRequestedTime = (input) => {
   const { data, impact, severeImpact } = input;
   // const avarageCase = whatIs('65%').of(data.totalHospitalBeds);
-  const expectCase = whatIs('35%').of(data.totalHospitalBeds);
-  impact.hospitalBedsByRequestedTime = (expectCase - impact.severeCasesByRequestedTime) * 0.05;
-  severeImpact.hospitalBedsByRequestedTime = (expectCase - severeImpact.severeCasesByRequestedTime) * 0.05;
+  const expectCase = whatIs('35%').of(data.totalHospitalBeds) * 0.05;
+  impact.hospitalBedsByRequestedTime = expectCase - impact.severeCasesByRequestedTime;
+  severeImpact.hospitalBedsByRequestedTime = expectCase - severeImpact.severeCasesByRequestedTime;
   return input;
 };
 
