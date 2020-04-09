@@ -10,9 +10,9 @@ const currentlyInfected = (input) => {
   return input;
 };
 const getInfactions = (t) => (d) => {
-  let i = 0;
-  for (i; t > 2; i++){
-    t = Math.floor(parseInt(t, 10) / 3)
+  let i, time = 0, t;
+  for (i; time > 2; i +=1) {
+    time = Math.floor(parseInt(time, 10) / 3);
   };
   const factor = i * 3;
   return d * (2 ** factor);
@@ -20,19 +20,19 @@ const getInfactions = (t) => (d) => {
 const infectionsByRequestedTime = (input) => {
   const { data, impact, severeImpact } = input;
   const periodType = data.periodType.trim().toLowerCase();
+  const monthsInfection = getInfactions(data.timeToElapse * 30);
+  const yearsInfaction = getInfactions(data.timeToElapse * 360);
+  const daysInfaction = getInfactions(data.timeToElapse);
   switch (periodType) {
     case 'months':
-      const monthsInfection = getInfactions(data.timeToElapse * 30);
-      impact.infectionsByRequestedTime = monthsInfection(impact.currentlyInfected );
+      impact.infectionsByRequestedTime = monthsInfection(impact.currentlyInfected);
       severeImpact.infectionsByRequestedTime = monthsInfection(severeImpact.currentlyInfected);
       break;
     case 'years':
-      const yearsInfaction = getInfactions(data.timeToElapse * 360);
       impact.infectionsByRequestedTime = yearsInfaction(impact.currentlyInfected);
       severeImpact.infectionsByRequestedTime = yearsInfaction(severeImpact.currentlyInfected);
       break;
     default:
-      const daysInfaction = getInfactions(data.timeToElapse);
       impact.infectionsByRequestedTime = daysInfaction(impact.currentlyInfected);
       severeImpact.infectionsByRequestedTime = daysInfaction(severeImpact.currentlyInfected);
       break;
@@ -66,19 +66,19 @@ const rateDollar = (...args) => (d) => (d * args.reduce((acc, preV) => ((acc * p
 const dollarsInFlight = (input) => {
   const { data, impact, severeImpact } = input
   const periodType = data.periodType.trim().toLowerCase()
+  const monthsRate = rateDollar(region.avgDailyIncomeInUSD, region.avgDailyIncomePopulation, data.timeToElapse * 30);
+  const yearsRate = rateDollar(region.avgDailyIncomeInUSD, region.avgDailyIncomePopulation, data.timeToElapse * 360);
+  const daysRate = rateDollar(region.avgDailyIncomeInUSD, region.avgDailyIncomePopulation, data.timeToElapse);
   switch (periodType) {
     case 'months':
-      const monthsRate = rateDollar(region.avgDailyIncomeInUSD, region.avgDailyIncomePopulation, data.timeToElapse * 30);
       impact.dollarsInFlight = monthsRate(impact.infectionsByRequestedTime);
       severeImpact.dollarsInFlight = monthsRate(severeImpact.infectionsByRequestedTime);
       break;
     case 'years':
-      yearsRate = rateDollar(region.avgDailyIncomeInUSD, region.avgDailyIncomePopulation, data.timeToElapse * 360)
       impact.dollarsInFlight = yearsRate(impact.infectionsByRequestedTime);
       severeImpact.dollarsInFlight = yearsRate(severeImpact.infectionsByRequestedTime);
       break;
     default:
-      const daysRate = rateDollar(region.avgDailyIncomeInUSD, region.avgDailyIncomePopulation, data.timeToElapse);
       impact.dollarsInFlight = daysRate(impact.infectionsByRequestedTime);
       severeImpact.dollarsInFlight = daysRate(severeImpact.infectionsByRequestedTime);
       break;
