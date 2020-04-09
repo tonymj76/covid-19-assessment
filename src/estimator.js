@@ -10,33 +10,34 @@ const currentlyInfected = (input) => {
   return input;
 };
 
-function infectionsByRequestedTime (input) {
+const infectionsByRequestedTime = (input) => {
   const { data, impact, severeImpact } = input;
 
-  const factorsNum = (period) =>{
+  const factorsNum = (period) => {
     let count = 0;
     while (period > 2) {
-      pariod = Math.floor(parseInt(period, 10) / 3);
-      count++;
-    };
+      period = Math.floor(parseInt(period, 10) / 3);
+      count = count + 1;
+    }
     return 3 * count;
   };
 
-  let periodType = data.periodType.trim().toLowerCase();
-  switch(periodType){
-    case 'days':
-      impact.infectionsByRequestedTime = impact.currentlyInfected * Math.pow(2, factorsNum(data.timeToElapse));
-      severeImpact.infectionsByRequestedTime = severeImpact.currentlyInfected * Math.pow(2, factorsNum(data.timeToElapse));
-      return input;
+  const periodType = data.periodType.trim().toLowerCase();
+  switch (periodType) {
     case 'months':
       impact.infectionsByRequestedTime = impact.currentlyInfected * Math.pow(2, factorsNum(data.timeToElapse*30));
       severeImpact.infectionsByRequestedTime = severeImpact.currentlyInfected * Math.pow(2, factorsNum(data.timeToElapse*30));
-      return input;
+      break;
     case 'years':
       impact.infectionsByRequestedTime = impact.currentlyInfected * Math.pow(2, factorsNum(data.timeToElapse*360));
       severeImpact.infectionsByRequestedTime = severeImpact.currentlyInfected * Math.pow(2, factorsNum(data.timeToElapse*360));
-      return input;
+      break;
+    default:
+      impact.infectionsByRequestedTime = impact.currentlyInfected * Math.pow(2, factorsNum(data.timeToElapse));
+      severeImpact.infectionsByRequestedTime = severeImpact.currentlyInfected * Math.pow(2, factorsNum(data.timeToElapse));
+      break;
   };
+  return input;
 };
 
 // const amount = (percentValue, amt) => percentValue/100 * amt
@@ -63,21 +64,22 @@ const hospitalBedsByRequestedTime = (input) => {
 
 const dollarsInFlight = (input) => {
   const { data, impact, severeImpact } = input
-  let periodType = data.periodType.trim().toLowerCase()
-  switch(periodType){
-    case 'days':
-      impact.dollarsInFlight = impact.infectionsByRequestedTime * region.avgDailyIncomeInUSD * region.avgDailyIncomePopulation * data.timeToElapse;
-      severeImpact.dollarsInFlight = severeImpact.infectionsByRequestedTime * region.avgDailyIncomeInUSD * region.avgDailyIncomePopulation * data.timeToElapse;
-      return input;
+  const periodType = data.periodType.trim().toLowerCase()
+  switch (periodType) {
     case 'months':
       impact.dollarsInFlight = impact.infectionsByRequestedTime * region.avgDailyIncomeInUSD * region.avgDailyIncomePopulation * data.timeToElapse*30;
       severeImpact.dollarsInFlight = severeImpact.infectionsByRequestedTime * region.avgDailyIncomeInUSD * region.avgDailyIncomePopulation * data.timeToElapse*30;
-      return input;
+      break;
     case 'years':
       impact.dollarsInFlight = impact.infectionsByRequestedTime * region.avgDailyIncomeInUSD * region.avgDailyIncomePopulation * data.timeToElapse*360;
       severeImpact.dollarsInFlight = severeImpact.infectionsByRequestedTime * region.avgDailyIncomeInUSD * region.avgDailyIncomePopulation * data.timeToElapse*360;
-      return input;
+      break;
+    default:
+      impact.dollarsInFlight = impact.infectionsByRequestedTime * region.avgDailyIncomeInUSD * region.avgDailyIncomePopulation * data.timeToElapse;
+      severeImpact.dollarsInFlight = severeImpact.infectionsByRequestedTime * region.avgDailyIncomeInUSD * region.avgDailyIncomePopulation * data.timeToElapse;
+      break;
   };
+  return input;
 };
 
 const covid19ImpactEstimator = (data) => {
