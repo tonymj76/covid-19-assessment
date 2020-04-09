@@ -9,29 +9,25 @@ const currentlyInfected = (input) => {
   severeImpact.currentlyInfected = reported(50);
   return input;
 };
-const getInfactions = (t) => (d) => {
-  let i = 0;
-  let time = t;
-  for (i; time > 2; i += 1) {
-    time = Math.floor(parseInt(time, 10) / 3);
-  }
-  const factor = i * 3;
+const getInfactions = (time) => (d) => {
+  factor = Math.floor(parseInt(time, 10) / 3);
   return d * (2 ** factor);
 };
+
 const infectionsByRequestedTime = (input) => {
   const { data, impact, severeImpact } = input;
   const periodType = data.periodType.trim().toLowerCase();
   const monthsInfection = getInfactions(data.timeToElapse * 30);
-  const yearsInfaction = getInfactions(data.timeToElapse * 360);
+  const weeksInfaction = getInfactions(data.timeToElapse * 7);
   const daysInfaction = getInfactions(data.timeToElapse);
   switch (periodType) {
     case 'months':
       impact.infectionsByRequestedTime = monthsInfection(impact.currentlyInfected);
       severeImpact.infectionsByRequestedTime = monthsInfection(severeImpact.currentlyInfected);
       break;
-    case 'years':
-      impact.infectionsByRequestedTime = yearsInfaction(impact.currentlyInfected);
-      severeImpact.infectionsByRequestedTime = yearsInfaction(severeImpact.currentlyInfected);
+    case 'weeks':
+      impact.infectionsByRequestedTime = weeksInfaction(impact.currentlyInfected);
+      severeImpact.infectionsByRequestedTime = weeksInfaction(severeImpact.currentlyInfected);
       break;
     default:
       impact.infectionsByRequestedTime = daysInfaction(impact.currentlyInfected);
@@ -74,10 +70,10 @@ const dollarsInFlight = (input) => {
     data.timeToElapse * 30
   );
 
-  const yearsRate = rateDollar(
+  const weeksRate = rateDollar(
     region.avgDailyIncomeInUSD,
     region.avgDailyIncomePopulation,
-    data.timeToElapse * 360
+    data.timeToElapse * 7
   );
 
   const daysRate = rateDollar(
@@ -91,9 +87,9 @@ const dollarsInFlight = (input) => {
       impact.dollarsInFlight = monthsRate(impact.infectionsByRequestedTime);
       severeImpact.dollarsInFlight = monthsRate(severeImpact.infectionsByRequestedTime);
       break;
-    case 'years':
-      impact.dollarsInFlight = yearsRate(impact.infectionsByRequestedTime);
-      severeImpact.dollarsInFlight = yearsRate(severeImpact.infectionsByRequestedTime);
+    case 'weeks':
+      impact.dollarsInFlight = weeksRate(impact.infectionsByRequestedTime);
+      severeImpact.dollarsInFlight = weeksRate(severeImpact.infectionsByRequestedTime);
       break;
     default:
       impact.dollarsInFlight = daysRate(impact.infectionsByRequestedTime);
