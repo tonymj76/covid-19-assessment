@@ -63,7 +63,7 @@ const hospitalBedsByRequestedTime = (input) => {
   return input;
 };
 
-const rateDollar = (...args) => (d) => (Math.floor(
+const rateDollar = (...args) => (d) => (Math.trunc(
   d * args.reduce((acc, preV) => ((acc * preV)))
 ));
 const dollarsInFlight = (input) => {
