@@ -72,45 +72,41 @@ const dollarsInFlight = (input) => {
   const periodType = data.periodType.trim().toLowerCase();
   const monthsRate = rateDollar(
     region.avgDailyIncomeInUSD,
-    region.avgDailyIncomePopulation,
     data.timeToElapse * 30
   );
 
   const weeksRate = rateDollar(
     region.avgDailyIncomeInUSD,
-    region.avgDailyIncomePopulation,
     data.timeToElapse * 7
   );
 
   const daysRate = rateDollar(
     region.avgDailyIncomeInUSD,
-    region.avgDailyIncomePopulation,
     data.timeToElapse
   );
-
   switch (periodType) {
     case 'months':
       impact.dollarsInFlight = Math.trunc(
-        monthsRate(impact.infectionsByRequestedTime)
+        monthsRate(impact.infectionsByRequestedTime * region.avgDailyIncomePopulation)
       );
       severeImpact.dollarsInFlight = Math.trunc(
-        monthsRate(severeImpact.infectionsByRequestedTime)
+        monthsRate(severeImpact.infectionsByRequestedTime * region.avgDailyIncomePopulation)
       );
       break;
     case 'weeks':
       impact.dollarsInFlight = Math.trunc(
-        weeksRate(impact.infectionsByRequestedTime)
+        weeksRate(impact.infectionsByRequestedTime * region.avgDailyIncomePopulation)
       );
       severeImpact.dollarsInFlight = Math.trunc(
-        weeksRate(severeImpact.infectionsByRequestedTime)
+        weeksRate(severeImpact.infectionsByRequestedTime * region.avgDailyIncomePopulation)
       );
       break;
     default:
       impact.dollarsInFlight = Math.trunc(
-        daysRate(impact.infectionsByRequestedTime)
+        daysRate(impact.infectionsByRequestedTime * region.avgDailyIncomePopulation)
       );
       severeImpact.dollarsInFlight = Math.trunc(
-        daysRate(severeImpact.infectionsByRequestedTime)
+        daysRate(severeImpact.infectionsByRequestedTime * region.avgDailyIncomePopulation)
       );
       break;
   }
