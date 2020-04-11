@@ -91,48 +91,48 @@ const dollarsInFlight = (input) => {
       impact.dollarsInFlight = monthsRate(impact.infectionsByRequestedTime);
       severeImpact.dollarsInFlight = monthsRate(severeImpact.infectionsByRequestedTime);
       impact.casesForICUByRequestedTime = Math.trunc(
-        whatIs('5%').of(impact.infectionsByRequestedTime)
+        whatIs('20%').of(impact.infectionsByRequestedTime)
       );
       severeImpact.casesForICUByRequestedTime = Math.trunc(
-        whatIs('5%').of(severeImpact.infectionsByRequestedTime)
+        whatIs('20%').of(severeImpact.infectionsByRequestedTime)
       );
       impact.casesForVentilatorsByRequestedTime = Math.trunc(
-        whatIs('2%').of(impact.infectionsByRequestedTime)
+        whatIs('17%').of(impact.infectionsByRequestedTime)
       );
       severeImpact.casesForVentilatorsByRequestedTime = Math.trunc(
-        whatIs('2%').of(severeImpact.infectionsByRequestedTime)
+        whatIs('17%').of(severeImpact.infectionsByRequestedTime)
       );
       break;
     case 'weeks':
       impact.dollarsInFlight = weeksRate(impact.infectionsByRequestedTime);
       severeImpact.dollarsInFlight = weeksRate(severeImpact.infectionsByRequestedTime);
       impact.casesForICUByRequestedTime = Math.trunc(
-        whatIs('5%').of(impact.infectionsByRequestedTime)
+        whatIs('20%').of(impact.infectionsByRequestedTime)
       );
       severeImpact.casesForICUByRequestedTime = Math.trunc(
-        whatIs('5%').of(severeImpact.infectionsByRequestedTime)
+        whatIs('20%').of(severeImpact.infectionsByRequestedTime)
       );
       impact.casesForVentilatorsByRequestedTime = Math.trunc(
-        whatIs('2%').of(impact.infectionsByRequestedTime)
+        whatIs('17%').of(impact.infectionsByRequestedTime)
       );
       severeImpact.casesForVentilatorsByRequestedTime = Math.trunc(
-        whatIs('2%').of(severeImpact.infectionsByRequestedTime)
+        whatIs('17%').of(severeImpact.infectionsByRequestedTime)
       );
       break;
     default:
       impact.dollarsInFlight = daysRate(impact.infectionsByRequestedTime);
       severeImpact.dollarsInFlight = daysRate(severeImpact.infectionsByRequestedTime);
       impact.casesForICUByRequestedTime = Math.trunc(
-        whatIs('5%').of(impact.infectionsByRequestedTime)
+        whatIs('20%').of(impact.infectionsByRequestedTime)
       );
       severeImpact.casesForICUByRequestedTime = Math.trunc(
-        whatIs('5%').of(severeImpact.infectionsByRequestedTime)
+        whatIs('20%').of(severeImpact.infectionsByRequestedTime)
       );
       impact.casesForVentilatorsByRequestedTime = Math.trunc(
-        whatIs('2%').of(impact.infectionsByRequestedTime)
+        whatIs('17%').of(impact.infectionsByRequestedTime)
       );
       severeImpact.casesForVentilatorsByRequestedTime = Math.trunc(
-        whatIs('2%').of(severeImpact.infectionsByRequestedTime)
+        whatIs('17%').of(severeImpact.infectionsByRequestedTime)
       );
       break;
   }
