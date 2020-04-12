@@ -1,9 +1,9 @@
 const compose = (...fns) => (...args) => fns.reduce((res, fn) => [fn.call(null, ...res)], args)[0];
 
-const giveValue = (value) => (d) => parseInt(value, 10) * d;
+const getInt = (str) => (d) => parseInt(str, 10) * d;
 const currentlyInfected = (input) => {
   const { data, impact, severeImpact } = input;
-  const reported = giveValue(data.reportedCases);
+  const reported = getInt(data.reportedCases);
 
   impact.currentlyInfected = reported(10);
   severeImpact.currentlyInfected = reported(50);
@@ -50,7 +50,6 @@ const convertPercent = (input) => {
 
 const hospitalBedsByRequestedTime = (input) => {
   const { data, impact, severeImpact } = input;
-  // const avarageCase = whatIs('65%').of(data.totalHospitalBeds);
   const expectCase = whatIs('35%').of(data.totalHospitalBeds);
   impact.hospitalBedsByRequestedTime = Math.trunc(
     expectCase - impact.severeCasesByRequestedTime

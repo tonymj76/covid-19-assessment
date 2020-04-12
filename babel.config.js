@@ -7,6 +7,8 @@ module.exports = {
           node: 'current'
         }
       }
-    ]
-  ]
+    ],
+    'stage-2'
+  ],
+  plugins: ["transform-vue-jsx", "transform-runtime"]
 };
