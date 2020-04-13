@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import App from './App.vue';
 import vuetify from './plugins/vuetify';
-import e from './estimator';
 
 Vue.config.productionTip = false;
 
