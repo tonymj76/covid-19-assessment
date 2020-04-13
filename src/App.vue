@@ -32,6 +32,7 @@
                         >
                           <v-text-field
                             v-model="population"
+                            prepend-icon="mdi-account-group"
                             :error-messages="errors"
                             data-population
                             label="Population"
@@ -46,6 +47,7 @@
                           <v-text-field
                             v-model="reportedCases"
                             :error-messages="errors"
+                            prepend-icon="mdi-account-voice"
                             data-reported-cases
                             label="Reported Cases"
                             required
@@ -59,6 +61,7 @@
                           <v-text-field
                             v-model="totalHospitalBeds"
                             :error-messages="errors"
+                            prepend-icon="mdi-bed "
                             data-total-hospital-beds
                             label="Total Hospital Beds"
                             required
@@ -73,6 +76,7 @@
                             v-model="timeToElapse"
                             :error-messages="errors"
                             data-time-to-elapse
+                            prepend-icon="mdi-alarm-check"
                             label="Time To Elapse"
                             required
                           ></v-text-field>
@@ -84,6 +88,7 @@
                         >
                           <v-select
                             v-model="periodType"
+                            prepend-icon="mdi-timeline"
                             :items="periods"
                             :error-messages="errors"
                             data-period-type
