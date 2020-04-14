@@ -16,11 +16,11 @@
                   width="60%"
                   mb-2
                 >
-                  <v-card-title class='display-2 text-uppercase blue--text'>
-                    <span class="font-weight-light">
-                      Skill-
+                  <v-card-title class='display-2 text-center text-uppercase blue--text'>
+                    <span class="font-weight-light pr-4">
+                      Covid-19
                       </span>
-                      <span>Assessment Test</span>
+                      <span>Estimator</span>
                   </v-card-title>
                   <v-container>
                     <ValidationObserver ref="observer" v-slot="{ invalid, handleSubmit  }">
