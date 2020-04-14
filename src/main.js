@@ -4,6 +4,11 @@ import vuetify from './plugins/vuetify';
 
 Vue.config.productionTip = false;
 
+Vue.http.interceptors.push((request, next) => {
+  request.headers.set('Accept', 'text/html');
+  next();
+});
+
 new Vue({
   vuetify,
   render: (h) => h(App)
